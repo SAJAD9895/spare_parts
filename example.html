@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoParts Pro - Premium Car Spare Parts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 25px;
+            padding: 5px 15px;
+            margin-left: 2rem;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 8px;
+            width: 250px;
+        }
+
+        .search-bar button {
+            background: #2a5298;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: #1e3c72;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23e0e0e0" width="1200" height="600"/><text x="600" y="300" text-anchor="middle" font-size="48" fill="%23666">Car Parts Background</text></svg>');
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-button {
+            background: #ff6b35;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,107,53,0.3);
+        }
+
+        .cta-button:hover {
+            background: #e55a2e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,53,0.4);
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e3c72;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .category-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #1e3c72;
+        }
+
+        .category-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-btn {
+            background: #2a5298;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .category-btn:hover {
+            background: #1e3c72;
+        }
+
+        /* Featured Products */
+        .featured-products {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #e0e0e0, #f0f0f0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #1e3c72;
+        }
+
+        .product-brand {
+            color: #ff6b35;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2a5298;
+            margin: 1rem 0;
+        }
+
+        .product-rating {
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 1rem;
+        }
+
+        .add-to-cart:hover {
+            background: #e55a2e;
+        }
+
+        /* Why Choose Us */
+        .why-choose {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #1e3c72;
+        }
+
+        .feature-item p {
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffd700;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #2a5298;
+            color: #ccc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .search-bar {
+                margin-left: 1rem;
+            }
+            
+            .search-bar input {
+                width: 180px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Spare</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for parts...">
+                <button type="submit">Search</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Premium Car Spare Parts</h1>
+            <p>Find genuine branded spare parts for all major car manufacturers. Quality guaranteed, fast delivery, competitive prices.</p>
+            <a href="#products" class="cta-button">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">🔧</div>
+                    <h3>Engine Parts</h3>
+                    <p>Pistons, gaskets, filters, and more engine components</p>
+                    <button class="category-btn">View Parts</button>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🛞</div>
+                    <h3>Brake System</h3>
+                    <p>Brake pads, rotors, calipers, and brake fluids</p>
+                    <button class="category-btn">View Parts</button>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🔌</div>
+                    <h3>Electrical</h3>
+                    <p>Batteries, alternators, starters, and wiring</p>
+                    <button class="category-btn">View Parts</button>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🛡️</div>
+                    <h3>Suspension</h3>
+                    <p>Shocks, struts, springs, and suspension arms</p>
+                    <button class="category-btn">View Parts</button>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🏁</div>
+                    <h3>Performance</h3>
+                    <p>Turbochargers, exhaust systems, and tuning parts</p>
+                    <button class="category-btn">View Parts</button>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🚗</div>
+                    <h3>Body Parts</h3>
+                    <p>Bumpers, fenders, lights, and exterior accessories</p>
+                    <button class="category-btn">View Parts</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products" id="products">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">Brake Pad Image</div>
+                    <div class="product-info">
+                        <div class="product-brand">Bosch</div>
+                        <h3>Premium Brake Pads</h3>
+                        <div class="product-rating">★★★★★</div>
+                        <div class="product-price">$89.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Oil Filter Image</div>
+                    <div class="product-info">
+                        <div class="product-brand">Mann Filter</div>
+                        <h3>Engine Oil Filter</h3>
+                        <div class="product-rating">★★★★☆</div>
+                        <div class="product-price">$24.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Spark Plug Image</div>
+                    <div class="product-info">
+                        <div class="product-brand">NGK</div>
+                        <h3>Platinum Spark Plugs</h3>
+                        <div class="product-rating">★★★★★</div>
+                        <div class="product-price">$12.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Battery Image</div>
+                    <div class="product-info">
+                        <div class="product-brand">Optima</div>
+                        <h3>RedTop Battery</h3>
+                        <div class="product-rating">★★★★★</div>
+                        <div class="product-price">$199.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Shock Absorber Image</div>
+                    <div class="product-info">
+                        <div class="product-brand">Bilstein</div>
+                        <h3>B4 Shock Absorber</h3>
+                        <div class="product-rating">★★★★☆</div>
+                        <div class="product-price">$149.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Air Filter Image</div>
+                    <div class="product-info">
+                        <div class="product-brand">K&N</div>
+                        <h3>Performance Air Filter</h3>
+                        <div class="product-rating">★★★★★</div>
+                        <div class="product-price">$49.99</div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose" id="about">
+        <div class="container">
+            <h2 class="section-title">Why Choose AutoParts Pro?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <h3>Genuine Parts</h3>
+                    <p>All parts are sourced directly from manufacturers and authorized dealers to ensure authenticity and quality.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Fast Delivery</h3>
+                    <p>Quick shipping options available with same-day dispatch for orders placed before 2 PM.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <h3>Best Prices</h3>
+                    <p>Competitive pricing with regular discounts and special offers for bulk purchases.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🛠️</div>
+                    <h3>Expert Support</h3>
+                    <p>Technical support team ready to help you find the right parts for your vehicle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AutoParts Pro</h3>
+                    <p>Your trusted partner for genuine car spare parts. Quality guaranteed, customer satisfaction our priority.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">Engine Parts</a></li>
+                        <li><a href="#">Brake System</a></li>
+                        <li><a href="#">Electrical</a></li>
+                        <li><a href="#">Suspension</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li>📧 info@autopartspro.com</li>
+                        <li>📞 +1 (555) 123-4567</li>
+                        <li>📍 123 Auto Street, Car City, CC 12345</li>
+                        <li>⏰ Mon-Fri: 8AM-6PM, Sat: 9AM-4PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AutoParts Pro. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                this.textContent = 'Added!';
+                this.style.background = '#28a745';
+                setTimeout(() => {
+                    this.textContent = 'Add to Cart';
+                    this.style.background = '#ff6b35';
+                }, 2000);
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.search-bar button').addEventListener('click', function(e) {
+            e.preventDefault();
+            const searchTerm = document.querySelector('.search-bar input').value;
+            if (searchTerm.trim()) {
+                alert(`Searching for: ${searchTerm}`);
+            }
+        });
+
+        // Category button clicks
+        document.querySelectorAll('.category-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const category = this.parentElement.querySelector('h3').textContent;
+                alert(`Viewing ${category} products`);
+            });
+        });
+    </script>
+</body>
+</html>
